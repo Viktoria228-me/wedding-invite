@@ -12,17 +12,17 @@
         }
 
         body {
-            background: #f4f0eb;
+            background: #f9f6f2;
             font-family: 'Inter', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
             color: #2a241f;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* плавное появление */
+        /* Анимации */
         @keyframes fadeUp {
             0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(40px);
             }
             100% {
                 opacity: 1;
@@ -30,11 +30,20 @@
             }
         }
 
-        section {
-            animation: fadeUp 0.6s ease-out forwards;
+        .hero, .full-photo, .schedule-section, .info-card, .rsvp-card {
+            animation: fadeUp 0.8s ease forwards;
         }
 
-        /* Герой с крупным фоном */
+        .schedule-card {
+            animation: fadeUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        .schedule-card:nth-child(1) { animation-delay: 0.1s; }
+        .schedule-card:nth-child(2) { animation-delay: 0.2s; }
+        .schedule-card:nth-child(3) { animation-delay: 0.3s; }
+        .schedule-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Hero-секция */
         .hero {
             min-height: 100vh;
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
@@ -71,10 +80,10 @@
         }
 
         .guest-name-hero {
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-top: 1rem;
-            background: rgba(0,0,0,0.4);
-            padding: 0.4rem 1rem;
+            background: rgba(0,0,0,0.5);
+            padding: 0.5rem 1rem;
             border-radius: 40px;
             backdrop-filter: blur(6px);
         }
@@ -86,30 +95,39 @@
             opacity: 0.7;
         }
 
-        /* секция большого фото пары */
+        /* Крупное фото пары */
         .full-photo {
             width: 100%;
-            height: 90vh;
-            object-fit: cover;
             display: block;
+            margin: 0;
+            padding: 0;
+            max-height: 90vh;
+            object-fit: cover;
         }
 
-        /* контейнеры */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2.5rem 1.5rem;
+            padding: 0 1.5rem 3rem;
         }
 
-        /* карточки расписания */
+        /* Расписание */
+        .schedule-section {
+            margin: 3rem 0 2rem;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            font-family: 'Times New Roman', serif;
+        }
         .schedule-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
             justify-content: center;
-            margin: 2rem 0;
         }
-
         .schedule-card {
             background: white;
             border-radius: 2rem;
@@ -117,77 +135,58 @@
             flex: 1;
             min-width: 180px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            text-align: center;
             transition: all 0.2s;
         }
-
         .schedule-card:hover {
             transform: translateY(-5px);
         }
-
         .schedule-time {
             font-weight: 700;
             color: #b48c6c;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
 
-        /* аккордеон */
-        .accordion-item {
-            background: white;
-            border-radius: 1.2rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            border: 1px solid #ece4dc;
-        }
-
-        .accordion-header {
-            padding: 1rem 1.3rem;
-            font-weight: 600;
-            font-size: 1.1rem;
+        /* Инфо-карточки */
+        .info-grid {
             display: flex;
-            justify-content: space-between;
-            cursor: pointer;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .info-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid #ece4dc;
+            transition: all 0.2s;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+        }
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #b48c6c;
         }
 
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            padding: 0 1.3rem;
-            color: #4a3e35;
-        }
-
-        .accordion-item.open .accordion-content {
-            max-height: 400px;
-            padding: 0 1.3rem 1.3rem 1.3rem;
-        }
-
-        .toggle-icon {
-            transition: transform 0.2s;
-        }
-
-        .accordion-item.open .toggle-icon {
-            transform: rotate(45deg);
-        }
-
-        /* форма rsvp */
+        /* Форма */
         .rsvp-card {
             background: white;
             border-radius: 2rem;
             padding: 2rem;
             margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
         }
-
         .form-group {
             margin-bottom: 1.4rem;
         }
-
         label {
             font-weight: 500;
             display: block;
             margin-bottom: 0.5rem;
         }
-
         input, select, textarea {
             width: 100%;
             padding: 0.8rem;
@@ -196,45 +195,35 @@
             font-size: 1rem;
             font-family: inherit;
         }
-
         .radio-group {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
             margin-top: 0.3rem;
         }
-
         .radio-group label {
             display: flex;
             align-items: center;
             gap: 0.4rem;
             font-weight: normal;
         }
-
         button {
             background: #b48c6c;
             color: white;
             border: none;
-            padding: 0.9rem 1.8rem;
+            padding: 0.9rem;
             border-radius: 3rem;
             font-size: 1rem;
             cursor: pointer;
             width: 100%;
             transition: 0.2s;
         }
-
         button:hover {
             background: #9c7458;
         }
-
-        .conditional-questions {
-            transition: 0.2s;
-        }
-
         .hidden-block {
             display: none;
         }
-
         footer {
             background: #2c2a28;
             color: #aaa;
@@ -242,7 +231,6 @@
             padding: 2rem;
             font-size: 0.8rem;
         }
-
         @media (max-width: 700px) {
             .schedule-grid {
                 flex-direction: column;
@@ -252,197 +240,210 @@
 </head>
 <body>
 
-<section class="hero">
-    <div>
-        <h2>SAVE THE DATE</h2>
-        <h1>Алексей & Екатерина</h1>
-        <div class="hero-date">15 августа 2026, суббота</div>
-        <div class="guest-name-hero" id="guestDisplayHero">Загрузка...</div>
-    </div>
-    <div class="scroll-hint">↓ листайте вниз</div>
-</section>
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+        <div>
+            <h2>SAVE THE DATE</h2>
+            <h1>Алексей & Екатерина</h1>
+            <div class="hero-date">15 августа 2026, суббота</div>
+            <div class="guest-name-hero" id="guestDisplayHero">Загрузка...</div>
+        </div>
+        <div class="scroll-hint">↓ листайте вниз</div>
+    </section>
 
-<img class="full-photo" src="https://images.unsplash.com/photo-1606216794706-49d4a5ff0a1d?q=80&w=2070&auto=format" alt="Пара крупно">
+    <!-- КРУПНОЕ ФОТО ПАРЫ -->
+    <img class="full-photo" src="https://images.unsplash.com/photo-1606216794706-49d4a5ff0a1d?q=80&w=2070&auto=format" alt="Пара крупно">
 
-<div class="container">
-    <!-- Расписание дня карточками -->
-    <h2 style="text-align: center;">✨ Расписание дня ✨</h2>
-    <div class="schedule-grid">
-        <div class="schedule-card"><div class="schedule-time">16:00</div> Сбор гостей<br>Приветственный фуршет</div>
-        <div class="schedule-card"><div class="schedule-time">17:00</div> Церемония<br>На открытой веранде</div>
-        <div class="schedule-card"><div class="schedule-time">18:30</div> Ужин и танцы<br>Живая музыка</div>
-        <div class="schedule-card"><div class="schedule-time">23:00</div> Фейерверк<br>Завершение</div>
-    </div>
-
-    <!-- Аккордеон с деталями -->
-    <div class="accordion-item">
-        <div class="accordion-header"><span>📍 Место проведения + парковка</span><span class="toggle-icon">+</span></div>
-        <div class="accordion-content">Усадьба «Лазурный берег», зал «Солнечный».<br>📍 Адрес: дер. Ясная, ул. Цветочная, 12.<br>🅿️ Бесплатная парковка на территории усадьбы (охраняемая).</div>
-    </div>
-    <div class="accordion-item">
-        <div class="accordion-header"><span>👗 Дресс-код</span><span class="toggle-icon">+</span></div>
-        <div class="accordion-content">Нежные тона, пыльная роза, шампань. Исключены яркие кислотные цвета. Мы будем рады элегантным образам.</div>
-    </div>
-    <div class="accordion-item">
-        <div class="accordion-header"><span>🎁 О подарках / Что НЕ ДАРИТЬ</span><span class="toggle-icon">+</span></div>
-        <div class="accordion-content">❌ Пожалуйста, избегайте: посуда, постельное белье, статуэтки, пледы. <br>✨ Нам важнее ваши эмоции. Конверты и пожелания приветствуются. <br>🎁 Наш вишлист: <a href="#">ссылка на список желаний</a> (по запросу).</div>
-    </div>
-
-    <!-- RSVP форма -->
-    <div class="rsvp-card">
-        <h3 style="margin-bottom: 1rem;">💌 Подтверждение присутствия</h3>
-        <div class="form-group">
-            <label>🎉 Сможете быть?</label>
-            <div class="radio-group" id="attendanceGroup">
-                <label><input type="radio" name="attendance" value="yes"> Да, с радостью</label>
-                <label><input type="radio" name="attendance" value="no"> Не смогу прийти</label>
+    <div class="container">
+        <!-- БЛОК РАСПИСАНИЯ -->
+        <div class="schedule-section">
+            <div class="section-title">✨ Расписание дня ✨</div>
+            <div class="schedule-grid">
+                <div class="schedule-card"><div class="schedule-time">16:00</div> Сбор гостей<br>Приветственный фуршет</div>
+                <div class="schedule-card"><div class="schedule-time">17:00</div> Церемония<br>На открытой веранде</div>
+                <div class="schedule-card"><div class="schedule-time">18:30</div> Ужин и танцы<br>Живая музыка</div>
+                <div class="schedule-card"><div class="schedule-time">23:00</div> Фейерверк<br>Завершение</div>
             </div>
         </div>
 
-        <div id="conditionalSection">
-            <div class="form-group">
-                <label>👥 С кем вы будете?</label>
-                <input type="text" id="withWhom" placeholder="например: с мужем/женой, один, с подругой">
+        <!-- ОСТРОВКИ ИНФОРМАЦИИ -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📍 Место проведения + парковка</h3>
+                <p>Усадьба «Лазурный берег», зал «Солнечный»<br>📍 Адрес: дер. Ясная, ул. Цветочная, 12<br>🅿️ Бесплатная парковка на территории усадьбы</p>
             </div>
-            <div class="form-group">
-                <label>🚌 Вам нужен трансфер?</label>
-                <div class="radio-group" id="transferGroup">
-                    <label><input type="radio" name="transfer" value="yes"> Да, нужен</label>
-                    <label><input type="radio" name="transfer" value="no"> Нет, на своем авто</label>
-                </div>
+            <div class="info-card">
+                <h3>👗 Дресс-код</h3>
+                <p>Нежные тона: пыльная роза, шампань, хаки. Пожалуйста, избегайте ярких кислотных цветов.</p>
             </div>
-            <div class="form-group">
-                <label>🏨 Останетесь ли на ночь в усадьбе?</label>
-                <div class="radio-group" id="overnightGroup">
-                    <label><input type="radio" name="overnight" value="yes"> Да, остаюсь</label>
-                    <label><input type="radio" name="overnight" value="no"> Нет, уеду</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>🎤 Будете говорить тост?</label>
-                <div class="radio-group" id="toastGroup">
-                    <label><input type="radio" name="toast" value="yes"> Да, хочу поздравить</label>
-                    <label><input type="radio" name="toast" value="no"> Без тоста</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>🌿 Аллергии / особенности питания</label>
-                <textarea rows="2" id="allergies" placeholder="Напишите, если есть аллергии или непереносимость..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>🍽️ Основное блюдо</label>
-                <select id="mealSelect">
-                    <option>Филе сибаса</option>
-                    <option>Говядина с трюфельным соусом</option>
-                    <option>Ризотто с тыквой (вегетарианское)</option>
-                </select>
+            <div class="info-card">
+                <h3>🎁 О подарках / Что НЕ ДАРИТЬ</h3>
+                <p>❌ Пожалуйста, избегайте: посуда, постельное белье, статуэтки, пледы.<br>✨ Нам важнее ваши эмоции. Конверты и тёплые пожелания приветствуются.<br>🎁 Наш вишлист: <a href="#">ссылка по запросу</a></p>
             </div>
         </div>
 
-        <button id="submitRSVP">Отправить организаторам</button>
-        <div id="rsvpMessage" style="margin-top: 1rem; text-align: center; font-size: 0.9rem;"></div>
+        <!-- RSVP ФОРМА -->
+        <div class="rsvp-card">
+            <h3 style="margin-bottom: 1rem;">💌 Подтверждение присутствия</h3>
+            <div class="form-group">
+                <label>🎉 Сможете быть?</label>
+                <div class="radio-group" id="attendanceGroup">
+                    <label><input type="radio" name="attendance" value="yes"> Да, с радостью</label>
+                    <label><input type="radio" name="attendance" value="no"> Не смогу прийти</label>
+                </div>
+            </div>
+
+            <div id="conditionalSection">
+                <div class="form-group">
+                    <label>👥 С кем вы будете?</label>
+                    <input type="text" id="withWhom" placeholder="например: с мужем / одна / с подругой">
+                </div>
+                <div class="form-group">
+                    <label>🚌 Вам нужен трансфер?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="transfer" value="yes"> Да, нужен</label>
+                        <label><input type="radio" name="transfer" value="no"> Нет, на своем авто</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>🏨 Останетесь на ночь в усадьбе?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="overnight" value="yes"> Да, остаюсь</label>
+                        <label><input type="radio" name="overnight" value="no"> Нет, уеду</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>🎤 Будете говорить тост?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="toast" value="yes"> Да, хочу поздравить</label>
+                        <label><input type="radio" name="toast" value="no"> Без тоста</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>🌿 Аллергии / особенности питания</label>
+                    <textarea rows="2" id="allergies" placeholder="Напишите, если есть аллергии или особые пожелания..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>🍽️ Основное блюдо</label>
+                    <select id="mealSelect">
+                        <option>Филе сибаса с овощами</option>
+                        <option>Говядина с трюфельным соусом</option>
+                        <option>Ризотто с тыквой (вегетарианское)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="submitRSVP">Отправить организаторам</button>
+            <div id="rsvpMessage" style="margin-top: 1rem; text-align: center;"></div>
+        </div>
     </div>
-</div>
 
-<footer>
-    С любовью, Алексей и Екатерина | Сделано с душой
-</footer>
+    <footer>
+        С любовью, Алексей и Екатерина
+    </footer>
 
-<script>
-    // Получаем имя из URL
-    const urlParams = new URLSearchParams(window.location.search);
-    let guestName = urlParams.get('guest');
-    if (guestName) {
-        guestName = decodeURIComponent(guestName).trim();
-        document.getElementById('guestDisplayHero').innerText = `✨ ${guestName}, мы вас ждём! ✨`;
-    } else {
-        document.getElementById('guestDisplayHero').innerHTML = `✨ Дорогой гость ✨<br><span style="font-size:0.8rem;">добавьте ?guest=Имя</span>`;
-    }
+    <script>
+        // === 1. Имя гостя из URL ===
+        const urlParams = new URLSearchParams(window.location.search);
+        let guestName = urlParams.get('guest');
+        const guestDisplay = document.getElementById('guestDisplayHero');
+        if (guestName) {
+            guestName = decodeURIComponent(guestName).trim();
+            guestDisplay.innerText = `✨ Дорогой(ая) ${guestName}, мы вас ждём! ✨`;
+        } else {
+            guestDisplay.innerHTML = `✨ Дорогой гость ✨<br><span style="font-size:0.8rem;">(добавьте ?guest=Имя в ссылку)</span>`;
+        }
 
-    // Аккордеон
-    const items = document.querySelectorAll('.accordion-item');
-    items.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-            item.classList.toggle('open');
-        });
-    });
-    if(items[0]) items[0].classList.add('open');
-
-    // Логика: если гость выбрал "Не смогу прийти" — скрыть остальные вопросы
-    const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-    const conditionalDiv = document.getElementById('conditionalSection');
-
-    function toggleConditionalQuestions() {
-        let selectedNo = false;
-        for (let radio of attendanceRadios) {
-            if (radio.checked && radio.value === 'no') {
-                selectedNo = true;
-                break;
+        // === 2. Логика: если выбран "Не смогу прийти" — скрыть все остальные вопросы ===
+        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
+        const conditionalDiv = document.getElementById('conditionalSection');
+        function toggleConditional() {
+            let isNo = false;
+            attendanceRadios.forEach(radio => {
+                if (radio.checked && radio.value === 'no') isNo = true;
+            });
+            if (conditionalDiv) {
+                conditionalDiv.classList.toggle('hidden-block', isNo);
             }
         }
-        if (selectedNo) {
-            conditionalDiv.classList.add('hidden-block');
-        } else {
-            conditionalDiv.classList.remove('hidden-block');
-        }
-    }
+        attendanceRadios.forEach(radio => radio.addEventListener('change', toggleConditional));
+        toggleConditional();
 
-    attendanceRadios.forEach(radio => {
-        radio.addEventListener('change', toggleConditionalQuestions);
-    });
-    toggleConditionalQuestions(); // стартовая проверка
+        // === 3. ОТПРАВКА В TELEGRAM ===
+        // ⚠️ ВСТАВЬ СВОИ ДАННЫЕ ОТ БОТА
+        const TELEGRAM_BOT_TOKEN = '8533148211:AAE1u_tx96gKpY7wB-z6uHJcOYP8MLmnVzk';   // СЮДА ТОКЕН от @BotFather
+        const TELEGRAM_CHAT_ID = '1314458411';       // СЮДА CHAT_ID от @userinfobot
 
-    // Функция сбора данных и отправки
-    document.getElementById('submitRSVP').addEventListener('click', () => {
-        let attendance = null;
-        for (let r of attendanceRadios) {
-            if (r.checked) { attendance = r.value; break; }
-        }
-        if (!attendance) {
-            document.getElementById('rsvpMessage').innerHTML = '❌ Пожалуйста, выберите, сможете ли быть.';
-            document.getElementById('rsvpMessage').style.color = '#b1624b';
-            return;
-        }
+        const submitBtn = document.getElementById('submitRSVP');
+        const messageDiv = document.getElementById('rsvpMessage');
 
-        let guest = guestName || 'Гость (имя не указано)';
-        let rsvpData = {
-            guest: guest,
-            attendance: attendance === 'yes' ? 'Придет' : 'Не придет',
-            withWhom: '',
-            transfer: null,
-            overnight: null,
-            toast: null,
-            allergies: '',
-            meal: ''
-        };
+        submitBtn.addEventListener('click', async () => {
+            // Проверка: выбран ли вариант "Сможете быть?"
+            let attendanceValue = null;
+            for (let radio of attendanceRadios) {
+                if (radio.checked) {
+                    attendanceValue = radio.value;
+                    break;
+                }
+            }
+            if (!attendanceValue) {
+                messageDiv.innerHTML = '❌ Пожалуйста, выберите, сможете ли быть на свадьбе.';
+                messageDiv.style.color = '#b1624b';
+                return;
+            }
 
-        if (attendance === 'yes') {
-            rsvpData.withWhom = document.getElementById('withWhom').value || 'Не указано';
-            const transferRadio = document.querySelectorAll('input[name="transfer"]');
-            for (let t of transferRadio) if(t.checked) rsvpData.transfer = t.value === 'yes' ? 'Нужен трансфер' : 'Свой авто';
-            const overnightRadio = document.querySelectorAll('input[name="overnight"]');
-            for (let o of overnightRadio) if(o.checked) rsvpData.overnight = o.value === 'yes' ? 'Останется на ночь' : 'Не останется';
-            const toastRadio = document.querySelectorAll('input[name="toast"]');
-            for (let to of toastRadio) if(to.checked) rsvpData.toast = to.value === 'yes' ? 'Будет тост' : 'Без тоста';
-            rsvpData.allergies = document.getElementById('allergies').value || 'Нет';
-            rsvpData.meal = document.getElementById('mealSelect').value;
-        } else {
-            // если не придет — остальные поля не трогаем
-        }
+            const guest = guestName || 'Гость (имя не указано)';
+            let message = `📌 НОВЫЙ ОТВЕТ ОТ ${guest}\n\n🎉 Придет: ${attendanceValue === 'yes' ? 'Да' : 'Нет'}`;
 
-        console.log('📨 ОТПРАВКА В TELEGRAM/БАЗУ ДАННЫХ:', rsvpData);
+            // Если гость идёт (attendance = yes), добавляем остальные ответы
+            if (attendanceValue === 'yes') {
+                const withWhom = document.getElementById('withWhom').value || '—';
+                const transfer = document.querySelector('input[name="transfer"]:checked')?.value === 'yes' ? 'Да, нужен' : 'Нет, на своем авто';
+                const overnight = document.querySelector('input[name="overnight"]:checked')?.value === 'yes' ? 'Да, останется' : 'Нет, уедет';
+                const toast = document.querySelector('input[name="toast"]:checked')?.value === 'yes' ? 'Да, будет тост' : 'Без тоста';
+                const allergies = document.getElementById('allergies').value || '—';
+                const meal = document.getElementById('mealSelect').value;
 
-        // Демо-сообщение об успехе
-        document.getElementById('rsvpMessage').innerHTML = '✅ Спасибо! Ваш ответ отправлен организаторам.';
-        document.getElementById('rsvpMessage').style.color = '#3b6e4b';
-        setTimeout(() => {
-            document.getElementById('rsvpMessage').innerHTML = '';
-        }, 4000);
+                message += `\n👥 С кем: ${withWhom}\n🚌 Трансфер: ${transfer}\n🏨 Ночлег: ${overnight}\n🎤 Тост: ${toast}\n🌿 Аллергии: ${allergies}\n🍽 Блюдо: ${meal}`;
+            }
 
-        // Здесь будет реальная интеграция с телеграм ботом через fetch (в следующих шагах)
-        // Пока данные готовы к отправке.
-    });
-</script>
+            // Если токен и chat_id вставлены — шлём запрос в Telegram API
+            if (TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN' && TELEGRAM_CHAT_ID !== 'YOUR_CHAT_ID') {
+                const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                try {
+                    const response = await fetch(telegramUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: 'HTML'
+                        })
+                    });
+                    if (response.ok) {
+                        messageDiv.innerHTML = '✅ Спасибо! Ваш ответ отправлен организаторам.';
+                        messageDiv.style.color = '#3b6e4b';
+                    } else {
+                        messageDiv.innerHTML = '⚠️ Ошибка при отправке. Пожалуйста, попробуйте позже.';
+                        messageDiv.style.color = '#b1624b';
+                    }
+                } catch (error) {
+                    console.error('Ошибка отправки в Telegram:', error);
+                    messageDiv.innerHTML = '⚠️ Ошибка соединения. Ответ не отправлен.';
+                    messageDiv.style.color = '#b1624b';
+                }
+            } else {
+                // Режим демо — показываем сообщение в консоли
+                console.log('📨 [DEMO] Ответ гостя (вставьте токен и chat_id):', message);
+                messageDiv.innerHTML = '✅ (Демо-режим) Ваш ответ получен. Для реальной отправки настройте Telegram.';
+                messageDiv.style.color = '#3b6e4b';
+            }
+
+            // Скрыть сообщение через 5 секунд
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
