@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- КЛЮЧЕВЫЕ МЕТА-ТЕГИ ДЛЯ МОБИЛЬНЫХ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <title>Свадебное приглашение · Алина & Дмитрий</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent; /* убирает серый фон при тапе на iPhone */
+    }
+
+    body {
+      background: #0a0a0a;
+      font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', 'Noto Sans', sans-serif;
+      color: #1e1e1e;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* полноэкранные секции — адаптивная высота */
+    section {
+      min-height: 100vh;
+      min-height: -webkit-fill-available; /* важный трюк для мобильных Safari */
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 4rem 1.5rem;
+    }
+
+    /* компенсация для мобильных адресных строк */
+    html {
+      height: -webkit-fill-available;
+    }
+
+    /* первая секция — крупное фото + приветствие */
+    .hero-section {
+      background: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), 
+                  url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2070&auto=format') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      flex-direction: column;
+      padding-top: env(safe-area-inset-top); /* отступ от «чёлки» */
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .hero-section .overlay-text {
+      max-width: 800px;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .hero-section h2 {
+      font-size: clamp(0.75rem, 4vw, 1rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .hero-section h1 {
+      font-size: clamp(2rem, 10vw, 4rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0.5rem 0;
+      font-family: 'Times New Roman', serif;
+    }
+
+    .guest-hero {
+      font-size: clamp(1rem, 5vw, 1.4rem);
+      margin-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      display: inline-block;
+      padding-top: 1rem;
+      word-break: break-word;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: max(1.5rem, env(safe-area-inset-bottom));
+      font-size: 0.8rem;
+      opacity: 0.7;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    /* секция с парой (крупное фото во всю ширину) */
+    .full-image-section {
+      padding: 0;
+      background: #f5efe9;
+    }
+    .full-image-section img {
+      width: 100%;
+      height: 100vh;
+      height: -webkit-fill-available;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* информационный блок — адаптивная сетка */
+    .info-grid {
+      background: #f5efe9;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2rem, 6vw, 4rem);
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .info-row.reverse {
+      flex-direction: row-reverse;
+    }
+    .info-photo {
+      flex: 1.2;
+      min-width: 200px;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .info-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 24px;
+    }
+    .info-text {
+      flex: 1;
+      padding: 0.5rem;
+    }
+    .info-text h3 {
+      font-size: clamp(1.4rem, 6vw, 2rem);
+      font-weight: 450;
+      margin-bottom: 0.8rem;
+    }
+    .info-text p {
+      font-size: clamp(0.95rem, 4vw, 1.1rem);
+      line-height: 1.5;
+    }
+
+    /* аккордеон — мобильные отступы */
+    .accordion-section {
+      background: #ffffff;
+      flex-direction: column;
+      gap: 2rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .accordion-container {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .accordion-item {
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 0.2rem;
+    }
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      font-size: clamp(1.1rem, 5vw, 1.5rem);
+      font-weight: 450;
+      cursor: pointer;
+      gap: 1rem;
+    }
+    .accordion-header span:first-child {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .accordion-icon {
+      font-size: 1.6rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      color: #4a4a4a;
+      padding-left: 0;
+      line-height: 1.5;
+      font-size: clamp(0.9rem, 4vw, 1rem);
+    }
+    .accordion-item.open .accordion-content {
+      max-height: 350px;
+      padding-bottom: 1.5rem;
+    }
+    .accordion-item.open .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    /* RSVP блок — отзывчивый */
+    .rsvp-section {
+      background: #f0ebe5;
+      flex-direction: column;
+      text-align: center;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .rsvp-card {
+      max-width: 700px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      padding: clamp(1.5rem, 5vw, 2.5rem);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+    .rsvp-card h3 {
+      font-size: clamp(1.4rem, 6vw, 2rem);
+      font-weight: 450;
+      margin-bottom: 1rem;
+    }
+    .question-group {
+      text-align: left;
+      margin: 1.5rem 0;
+    }
+    .question-group label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: clamp(0.9rem, 4vw, 1rem);
+    }
+    select, input {
+      width: 100%;
+      padding: clamp(0.7rem, 3vw, 0.9rem);
+      border-radius: 50px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-family: inherit;
+      -webkit-appearance: none;
+      appearance: none;
+      background: white;
+    }
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      border: none;
+      padding: 0;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: normal;
+      cursor: pointer;
+    }
+    button {
+      background: #000;
+      color: white;
+      border: none;
+      padding: clamp(0.8rem, 3.5vw, 1rem);
+      border-radius: 50px;
+      font-size: clamp(0.9rem, 4vw, 1rem);
+      cursor: pointer;
+      width: 100%;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+    button:active {
+      opacity: 0.8;
+    }
+    footer {
+      background: #0a0a0a;
+      color: #a0a0a0;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    }
+
+    /* планшеты и десктоп не ломаются */
+    @media (max-width: 768px) {
+      section {
+        padding: 3rem 1rem;
+      }
+      .info-row, .info-row.reverse {
+        flex-direction: column;
+      }
+      .info-photo {
+        width: 100%;
+      }
+      .radio-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+    }
+
+    /* для очень узких экранов */
+    @media (max-width: 480px) {
+      .accordion-header span:first-child {
+        font-size: 1rem;
+      }
+      .accordion-icon {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero-section" id="home">
+  <div class="overlay-text">
+    <h2>SAVE THE DATE</h2>
+    <h1>Алины & Дмитрия</h1>
+    <div class="guest-hero" id="heroGuestName">...загрузка</div>
+  </div>
+  <div class="scroll-hint">↓ листайте вниз</div>
+</section>
+
+<section class="full-image-section">
+  <img src="https://images.unsplash.com/photo-1606216794706-49d4a5ff0a1d?q=80&w=2070&auto=format" alt="Пара крупно">
+</section>
+
+<section class="info-grid">
+  <div class="info-row">
+    <div class="info-photo">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format" alt="локация">
+    </div>
+    <div class="info-text">
+      <h3>📍 Идеальное место</h3>
+      <p>Усадьба «Лазурный берег», зал «Солнечный». Тихая заводь, дубы и закат. Церемония на открытой веранде.</p>
+    </div>
+  </div>
+  <div class="info-row reverse">
+    <div class="info-photo">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format" alt="дресс-код">
+    </div>
+    <div class="info-text">
+      <h3>👗 Дресс-код: effortless chic</h3>
+      <p>Нежные тона, натуральные ткани. Главное — ваше удобство и светлая улыбка.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Аккордеон -->
+<section class="accordion-section">
+  <div class="accordion-container">
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🎁 О подарках</span>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-content">Мы будем рады вашему вниманию и тёплым словам. Для вдохновения — наш вишлист в отдельном письме, но важнее всего ваше присутствие.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🍽️ Меню и аллергии</span>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-content">Фуршет с авторскими закусками, горячее на выбор (рыба/мясо/вегетарианское). Пожалуйста, укажите предпочтения в форме ниже.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>🎵 Программа</span>
+        <span class="accordion-icon">+</span>
+      </div>
+      <div class="accordion-content">16:00 сбор / 17:00 церемония / 18:30 ужин / 20:30 live-музыка и танцы / 23:00 фейерверк.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp-section">
+  <div class="rsvp-card">
+    <h3>💫 Будем рады вашему ответу</h3>
+    <div class="question-group">
+      <label>🍴 Ваше блюдо</label>
+      <select id="mealSelect">
+        <option>Филе сибаса с овощами</option>
+        <option>Говядина с трюфельным соусом</option>
+        <option>Ризотто с тыквой (вегетарианское)</option>
+      </select>
+    </div>
+    <div class="question-group">
+      <label>🎉 Сможете быть?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="attendance" value="Да, с радостью"> Да, с радостью</label>
+        <label><input type="radio" name="attendance" value="Не смогу"> К сожалению, нет</label>
+      </div>
+    </div>
+    <div class="question-group">
+      <label>✍️ Ваши пожелания</label>
+      <input type="text" id="wishes" placeholder="Аллергии, тост, особые просьбы...">
+    </div>
+    <button id="submitRSVP">отправить организаторам</button>
+    <div id="rsvpFeedback" style="margin-top: 1rem; font-size: 0.85rem;"></div>
+  </div>
+</section>
+
+<footer>
+  Одна ссылка — каждому гостю лично. С любовью, Алина и Дмитрий
+</footer>
+
+<script>
+  // --- Имя гостя из ссылки ---
+  function getGuestFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    let g = params.get('guest');
+    if(g) return decodeURIComponent(g).trim();
+    return null;
+  }
+  const guestName = getGuestFromURL();
+  const heroSpan = document.getElementById('heroGuestName');
+  if(guestName) {
+    heroSpan.innerHTML = `✨ Дорогой(ая) ${guestName}, мы ждём вас! ✨`;
+  } else {
+    heroSpan.innerHTML = `Дорогой гость, укажите ?guest=ВашеИмя в ссылке`;
+    console.log('ℹ️ Добавьте ?guest=Анна к URL');
+  }
+
+  // --- Аккордеон ---
+  const accordions = document.querySelectorAll('.accordion-item');
+  accordions.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    header.addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+  });
+  if(accordions.length) accordions[0].classList.add('open');
+
+  // --- Отправка ответов ---
+  const submitBtn = document.getElementById('submitRSVP');
+  const feedbackDiv = document.getElementById('rsvpFeedback');
+  
+  function saveGuestAnswers() {
+    const meal = document.getElementById('mealSelect').value;
+    let attendance = null;
+    const radios = document.querySelectorAll('input[name="attendance"]');
+    for(let r of radios) if(r.checked) { attendance = r.value; break; }
+    const wishes = document.getElementById('wishes').value;
+    
+    if(!attendance) {
+      feedbackDiv.innerHTML = '❌ Пожалуйста, выберите — сможете быть или нет';
+      feedbackDiv.style.color = '#b1624b';
+      return;
+    }
+    const guest = guestName || 'Гость (без имени)';
+    const answer = { guest, meal, attendance, wishes, date: new Date().toISOString() };
+    console.log('📋 Ответ гостя:', answer);
+    
+    let all = JSON.parse(localStorage.getItem('wedding_guests_responses') || '[]');
+    all.push(answer);
+    localStorage.setItem('wedding_guests_responses', JSON.stringify(all));
+    
+    feedbackDiv.innerHTML = '✅ Спасибо! Ваш ответ учтён. Скоро увидимся 🤍';
+    feedbackDiv.style.color = '#3b6e4b';
+    setTimeout(() => feedbackDiv.innerHTML = '', 4000);
+  }
+  submitBtn.addEventListener('click', saveGuestAnswers);
+</script>
+</body>
+</html>
