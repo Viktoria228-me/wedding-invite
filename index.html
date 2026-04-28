@@ -235,6 +235,71 @@
             .schedule-grid {
                 flex-direction: column;
             }
+            /* ===== ИСПРАВЛЕНИЯ ДЛЯ АЙФОНА ===== */
+        @media (max-width: 550px) {
+            /* Радиокнопки вертикально */
+            .radio-group {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .radio-group label {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                width: 100%;
+            }
+            
+            /* Увеличиваем кнопки */
+            input[type="radio"] {
+                width: 1.2rem;
+                height: 1.2rem;
+                flex-shrink: 0;
+            }
+            
+            /* Текст не обрезается */
+            input, select, textarea {
+                font-size: 16px;
+            }
+            
+            /* Отступы в карточке формы */
+            .rsvp-card {
+                padding: 1.2rem;
+            }
+            
+            /* Расстояние между полями */
+            .form-group {
+                margin-bottom: 1.2rem;
+            }
+            
+            /* Заголовок формы */
+            .rsvp-card h3 {
+                font-size: 1.3rem;
+                text-align: center;
+            }
+            
+            /* Кнопка отправки удобнее для пальца */
+            button {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Чтобы на совсем маленьких экранах (iPhone SE) было ещё лучше */
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+            
+            .schedule-time {
+                font-size: 1.1rem;
+            }
+        }
         }
     </style>
 </head>
@@ -257,7 +322,7 @@
     <div class="container">
         <!-- БЛОК РАСПИСАНИЯ -->
         <div class="schedule-section">
-            <div class="section-title">✨ Расписание дня ✨</div>
+            <div class="section-title"> Расписание дня </div>
             <div class="schedule-grid">
                 <div class="schedule-card"><div class="schedule-time">16:00</div> Сбор гостей<br>Приветственный фуршет</div>
                 <div class="schedule-card"><div class="schedule-time">17:00</div> Церемония<br>На открытой веранде</div>
@@ -270,15 +335,15 @@
         <div class="info-grid">
             <div class="info-card">
                 <h3>📍 Место проведения + парковка</h3>
-                <p>Усадьба «Лазурный берег», зал «Солнечный»<br>📍 Адрес: дер. Ясная, ул. Цветочная, 12<br>🅿️ Бесплатная парковка на территории усадьбы</p>
+                <p>Усадьба «Лазурный берег», зал «Солнечный»<br> Адрес: дер. Ясная, ул. Цветочная, 12<br> Бесплатная парковка на территории усадьбы</p>
             </div>
             <div class="info-card">
-                <h3>👗 Дресс-код</h3>
+                <h3> Дресс-код</h3>
                 <p>Нежные тона: пыльная роза, шампань, хаки. Пожалуйста, избегайте ярких кислотных цветов.</p>
             </div>
             <div class="info-card">
-                <h3>🎁 О подарках / Что НЕ ДАРИТЬ</h3>
-                <p>❌ Пожалуйста, избегайте: посуда, постельное белье, статуэтки, пледы.<br>✨ Нам важнее ваши эмоции. Конверты и тёплые пожелания приветствуются.<br>🎁 Наш вишлист: <a href="#">ссылка по запросу</a></p>
+                <h3> О подарках / Что НЕ ДАРИТЬ</h3>
+                <p>   Пожалуйста, избегайте: посуда, постельное белье, статуэтки, пледы.<br>   Нам важнее ваши эмоции. Конверты и тёплые пожелания приветствуются.<br>   Наш вишлист: <a href="#">ссылка по запросу</a></p>
             </div>
         </div>
 
@@ -286,7 +351,7 @@
         <div class="rsvp-card">
             <h3 style="margin-bottom: 1rem;">💌 Подтверждение присутствия</h3>
             <div class="form-group">
-                <label>🎉 Сможете быть?</label>
+                <label> Сможете быть?</label>
                 <div class="radio-group" id="attendanceGroup">
                     <label><input type="radio" name="attendance" value="yes"> Да, с радостью</label>
                     <label><input type="radio" name="attendance" value="no"> Не смогу прийти</label>
@@ -295,36 +360,36 @@
 
             <div id="conditionalSection">
                 <div class="form-group">
-                    <label>👥 С кем вы будете?</label>
+                    <label> С кем вы будете?</label>
                     <input type="text" id="withWhom" placeholder="например: с мужем / одна / с подругой">
                 </div>
                 <div class="form-group">
-                    <label>🚌 Вам нужен трансфер?</label>
+                    <label> Вам нужен трансфер?</label>
                     <div class="radio-group">
                         <label><input type="radio" name="transfer" value="yes"> Да, нужен</label>
                         <label><input type="radio" name="transfer" value="no"> Нет, на своем авто</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>🏨 Останетесь на ночь в усадьбе?</label>
+                    <label> Останетесь на ночь в усадьбе?</label>
                     <div class="radio-group">
                         <label><input type="radio" name="overnight" value="yes"> Да, остаюсь</label>
                         <label><input type="radio" name="overnight" value="no"> Нет, уеду</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>🎤 Будете говорить тост?</label>
+                    <label> Будете говорить тост?</label>
                     <div class="radio-group">
                         <label><input type="radio" name="toast" value="yes"> Да, хочу поздравить</label>
                         <label><input type="radio" name="toast" value="no"> Без тоста</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>🌿 Аллергии / особенности питания</label>
+                    <label> Аллергии / особенности питания</label>
                     <textarea rows="2" id="allergies" placeholder="Напишите, если есть аллергии или особые пожелания..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>🍽️ Основное блюдо</label>
+                    <label> Основное блюдо</label>
                     <select id="mealSelect">
                         <option>Филе сибаса с овощами</option>
                         <option>Говядина с трюфельным соусом</option>
@@ -371,8 +436,8 @@
 
         // === 3. ОТПРАВКА В TELEGRAM ===
         // ⚠️ ВСТАВЬ СВОИ ДАННЫЕ ОТ БОТА
-        const TELEGRAM_BOT_TOKEN = '8533148211:AAE1u_tx96gKpY7wB-z6uHJcOYP8MLmnVzk';   // СЮДА ТОКЕН от @BotFather
-        const TELEGRAM_CHAT_ID = '1314458411';       // СЮДА CHAT_ID от @userinfobot
+        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN';   // СЮДА ТОКЕН от @BotFather
+        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID';       // СЮДА CHAT_ID от @userinfobot
 
         const submitBtn = document.getElementById('submitRSVP');
         const messageDiv = document.getElementById('rsvpMessage');
